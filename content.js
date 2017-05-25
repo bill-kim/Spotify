@@ -5,10 +5,7 @@
 let id = setInterval(checkLoaded, 300);
 
 function checkLoaded() {
-    if (document.getElementsByClassName('track-info__name').length === 0) {
-        return;
-    }
-    else {
+    if (document.getElementsByClassName('track-info__name').length !== 0) {
         clearInterval(id);
         fullyLoaded();
     }
@@ -25,6 +22,6 @@ function fullyLoaded() {
 
     console.log(info);
 
-    chrome.runtime.sendMessage(info, null);
+    chrome.runtime.sendMessage({from: "content", data: info}, null);
 }
 
